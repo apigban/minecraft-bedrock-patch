@@ -1,0 +1,79 @@
+---
+- name: Upgrade minecraft bedrock server
+  hosts: minecraft_servers
+  gather_facts: true
+  vars:
+    mc_bedrock_version: 1.21.41.01
+    mc_dir: /var/lib/pufferpanel/servers/7f3aca4a
+  tasks:
+    # - name: Check free space
+    #   shell: df / --output\=avail | tail -1
+    #   register: tmp_freespace
+        
+    # - fail:
+    #     msg: nvme-vm--701--disk--0 does not have the minimum space required to continue (5Gb requested). 
+    #   when: tmp_freespace.stdout|float is lt 5000000
+
+    # - name: Install dependencies
+    #   ansible.builtin.package:
+    #     name: python3-psutil
+    #     state: present
+    #   loop: 
+    #     - python3-psutil
+    #     - tmux
+
+    # - name: Create backup of minecraft dir
+    #   block: 
+    #     - name: stat on backup file
+    #       ansible.builtin.stat:
+    #         path: "{{mc_backup_dir}}/{{ ansible_date_time.date }}_{{ mc_dir | split('/') | last }}.tar.gz"
+    #       register: stat_backup
+
+    #     - name: Archive minecraft dir if it doesnt exist
+    #       community.general.archive:
+    #         path:
+    #         - "{{mc_dir}}/*"
+    #         dest: "{{mc_backup_dir}}/{{ ansible_date_time.date }}_{{ mc_dir | split('/') | last }}.tar.gz"
+    #         format: gz
+    #       when: not stat_backup.stat.exists
+
+    # - name: Install new version of minecraft-bedrock
+    #   block: 
+    #     - name: Getting process IDs of the bedrock_server
+    #       community.general.pids:
+    #           name: bedrock_server
+    #       register: pids_of_bedrock_server
+
+    #     - name: Debug
+    #       ansible.builtin.debug:
+    #         var: pids_of_bedrock_server.pids
+
+    #     - name: Kill process
+    #       ansible.builtin.command:
+    #         cmd: "kill -9 {{ item }}"
+    #       loop: "{{ pids_of_bedrock_server.pids | list }}"
+
+      # - name: Download file
+      #   ansible.builtin.get_url:
+      #     url: "{{ mc_bedrock_url }}"
+      #     dest: "{{ mc_dir }}"
+      #     owner: root
+
+      # - name: Unzip file
+      #   ansible.builtin.unzip:
+      #     src: "{{ mc_dir }}/bedrock_server-{{ mc_bedrock_version }}.zip"
+      #     dest: "{{ mc_dir }}"
+      #     owner: root
+
+        # - name: Copy file with owner and permissions
+        #   ansible.builtin.copy:
+        #     src: "{{ mc_dir }}/bedrock_server-{{ mc_bedrock_version }}"
+        #     dest: "{{ mc_dir }}/bedrock_server"
+        #     owner: root
+        #     group: root
+    - name: Upgrade done! Please restart your server.
+      ansible.builtin.debug:
+        msg: 
+        - "Upgrade done! Please restart your server."
+        - "Login to your server and run 'tmux attach -t bedrock_server'."
+        - "execute: 'cd {{ mc_dir }} ; ./bedrock_server' to start the server"

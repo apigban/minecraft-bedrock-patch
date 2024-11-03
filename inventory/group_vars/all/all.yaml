@@ -1,0 +1,4 @@
+---
+mc_bedrock_url: "https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-{{mc_bedrock_version}}.zip"
+mc_backup_dir: /var/lib/pufferpanel/servers/backup
+
