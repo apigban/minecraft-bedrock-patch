@@ -53,17 +53,17 @@
             cmd: "kill -9 {{ item }}"
           loop: "{{ pids_of_bedrock_server.pids | list }}"
 
-      - name: Download file
-        ansible.builtin.get_url:
-          url: "{{ mc_bedrock_url }}"
-          dest: "{{ mc_dir }}"
-          owner: root
+        - name: Download file
+          ansible.builtin.get_url:
+            url: "{{ mc_bedrock_url }}"
+            dest: "{{ mc_dir }}"
+            owner: root
 
-      - name: Unzip file
-        ansible.builtin.unzip:
-          src: "{{ mc_dir }}/bedrock_server-{{ mc_bedrock_version }}.zip"
-          dest: "{{ mc_dir }}"
-          owner: root
+        - name: Unzip file
+          ansible.builtin.unzip:
+            src: "{{ mc_dir }}/bedrock_server-{{ mc_bedrock_version }}.zip"
+            dest: "{{ mc_dir }}"
+            owner: root
 
         - name: Copy file with owner and permissions
           ansible.builtin.copy:

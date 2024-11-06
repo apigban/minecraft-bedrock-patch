@@ -19,10 +19,15 @@ The playbook is written in Ansible and consists of several tasks that perform th
 The playbook uses several variables that can be configured in the inventory/secrets.yaml file:
 
 `ansible_user`: The username to use for SSH connections
+
 `ansible_ssh_password`: The password to use for SSH connections
+
 `ansible_become_password`: The password to use for privilege escalation
+
 `ansible_ssh_private_key_file`: The path to the private key file to use for SSH connections
+
 `mc_bedrock_version`: The version of Minecraft Bedrock to install
+
 `mc_dir`: The directory where Minecraft Bedrock is installed
 
 ## Usage
