@@ -6,3 +6,4 @@ inventory/key/home.pub
 inventory/key/home
 vault_pass.sh
 inventory/secrets.yaml
+navigator/log/ansible-navigator.log
